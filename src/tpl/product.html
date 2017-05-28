@@ -1,0 +1,99 @@
+{% extends 'layout.html' %}
+
+{% set prdInfo = page.prdInfo %}
+{% set storeConfig = storeConfiguration %}
+
+{% block headseo %}
+<meta name="keywords" content="{{page.keywords}}">
+<meta name="description" content="{{page.description}}">
+{%endblock%}
+
+{% block title %} {{page.title}} {%endblock%}
+
+{% block config %}
+{% include "widget/variate.html" with storeConfig %}
+{% endblock %}
+
+{% block css %}
+{% parent %}
+<!-- build:css -->
+<link rel="stylesheet" href="../css/reset.css">
+<link rel="stylesheet" href="../css/gmprdui.css">
+<link rel="stylesheet" href="../css/product.css">
+<!-- endbuild -->
+{% endblock %}
+
+{% block content  %}
+{% include "widget/prdinfo.html" with  prdInfo %}
+<div class="wbox">
+<h1 class="animated_div">这是一个使用gulp-swig 的简单示例页面。</h1>
+<br>
+
+<h2 class="hd-title">循环对象</h2>
+<ol class="serviceTags">
+{% for serviceTag in page.serviceTags %}
+    <li>{{ serviceTag }}</li>
+{% endfor %}
+</ol>
+<h2 class="hd-title">循环数组</h2>
+<ul class="bread">
+{% for bread in page.bread %}
+    <li>
+        {% if bread.href!="" %}
+        <a href="{{bread.href}}" title="{{bread.title}}">{{bread.text}}</a>
+        {% else %}
+        <span title="{{bread.title}}">{{bread.text}}</span>
+        {% endif  %}
+    </li>
+{% endfor %}
+</ul>
+</div>
+
+<div class="wbox clx">
+    <div class="dt-side">
+        <div class="panel-box" id="lookToBuy">浏览最终购买</div>
+    </div>
+	<div class="dt-main">
+		<div id="prdDesc" class="prdDescOut">
+			<div id="gfixed"></div>
+			<div id="fixtabox" class="pdtl-tab">
+				<ul class="prdtitbox" id="prd_tbox">
+					<li class="cur">
+						<a href="javascript:;">商品详情</a>
+					</li>
+					<li>
+						<a href="javascript:;">规格与包装</a>
+					</li>
+					<li>
+						<a href="javascript:;" class="pingjia_header">商品评价<span class="c00">（3）</span></a>
+					</li>
+				</ul>
+			</div>
+            <div class="pedmainbox" id="prd_data">
+				<div style="height: 400px; display: block; background: rgb(238, 238, 238);">商品详情商品详情</div>
+				<div style="height: 500px; display: none; background: rgb(216, 216, 216);">规格与包装规格与包装</div>
+				<div class="comment-box" style="height: 500px;display: none;">
+                    <strong>商品评价</strong>
+				</div>
+            </div>	
+        </div>
+    </div>
+</div>
+
+
+{% include "widget/footer.html" %}
+
+{% endblock %}
+
+{% block javascript %}
+{% parent %}
+<!-- build:widget -->
+<script src="../js/jquery/jquery.js"></script>
+<script src="../js/widget/gload.js"></script>
+<script src="../js/widget/gfixed.js"></script>
+<script src="../js/widget/gtabs.js"></script>
+<!-- endbuild -->
+<!-- build:app -->
+<script src="../js/app/app.js"></script>
+<!-- endbuild -->
+{% endblock %}

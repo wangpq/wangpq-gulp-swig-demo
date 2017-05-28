@@ -1,0 +1,55 @@
+{% extends 'layout.html' %}
+
+{% set prdInfo = page.prdInfo %}
+{% set storeConfig = storeConfiguration %}
+
+{% block headseo %} 
+<meta name="keywords" content="{{page.keywords}}">
+<meta name="description" content="{{page.description}}">
+{%endblock%}
+
+{% block title %} {{page.title}} {%endblock%}
+
+{% block config %}
+{% include "widget/variate.html" with storeConfig %}
+{% endblock %}
+
+{% block css %}
+{% parent %}
+<link rel="stylesheet" href="../css/gmprdui.css">
+<link rel="stylesheet" href="../css/prdbigimg.css">
+{% endblock %}
+
+{% block content  %}
+{% include "widget/prdinfo.html" with  prdInfo %}
+<div class="wbox">
+<h1>这是一个使用gulp-swig 的示例页面。</h1>
+<br>   
+
+<h2 class="hd-title">循环对象</h2>
+<ol class="serviceTags">
+{% for serviceTag in page.serviceTags %}
+    <li>{{ serviceTag }}</li>
+{% endfor %}
+</ol>
+<h2 class="hd-title">循环数组</h2>
+<ul class="bread">
+{% for bread in page.bread %}
+    <li>
+        {% if bread.href!="" %}
+        <a href="{{bread.href}}" title="{{bread.title}}">{{bread.text}}</a>
+        {% else %}
+        <span title="{{bread.title}}">{{bread.text}}</span>
+        {% endif  %}
+    </li>
+{% endfor %}
+</ul>
+</div>
+
+{% include "widget/footer.html" %}
+
+{% endblock %}
+
+
+
+
