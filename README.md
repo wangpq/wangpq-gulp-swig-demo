@@ -1,5 +1,5 @@
 ﻿# wangpq-gulp-swig-demo
-一个简单的gulp-swig示例，使用了gulp-connect-multi自动检测html、css、js的改动并自动刷新，更多功能尚待完善。
+> 一个简单的gulp-swig示例，使用了gulp-connect-multi自动检测html、css、js的改动并自动刷新，更多功能尚待完善。
 
 怎样运行示例?
 
@@ -52,16 +52,19 @@ npm install --save-dev gulp-rev-collector
 2. 打开 node_modules\gulp-rev\index.js
 
 第144行 manifest[originalFile] = revisionedFile; 
+
 更新为: manifest[originalFile] = originalFile + '?v=' + file.revHash;
 
 3. 打开 nodemodules\gulp-rev\nodemodules\rev-path\index.js
 
 10行 return filename + '-' + hash + ext; 
+
 更新为: return filename + ext;
 
 4. 打开 node_modules\gulp-rev-collector\index.js
 
 40行  path.basename(json[key]).replace(new RegExp( opts.revSuffix ), '' ) 
+
 更新为: path.basename(json[key]).split('?')[0] 
 
 5. 配置gulpfile.js, 可参考下面 gulpfile.js 代码
